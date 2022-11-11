@@ -1,6 +1,9 @@
 const express = require('express')
+require('dotenv').config({path: './config/.env'});
 const app = express()
-require('dotenv').config();
+require('./config/db');
+
+
 
 app.get('/', (req, res) => {
   res.send('Hello World!')

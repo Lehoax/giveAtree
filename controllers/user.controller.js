@@ -43,31 +43,6 @@ module.exports.updateUser = async (req, res) => {
     }
 }
 
-module.exports.updateUser = async (req, res) => {
-    if (!ObjectID.isValid(req.params.id))
-    return res.status(400).send("ID unknown : " + req.params.id);
-
-    try {
-        await UserModel.findOneAndUpdate(
-        { _id: req.params.id },
-        {
-            $set: {
-            pseudo: req.body.pseudo,
-            street: req.body.street,
-            cp: req.body.cp,
-            city: req.body.city
-            },
-        },
-        { new: true, upsert: true, setDefaultsOnInsert: true },
-        (err, docs) => {
-            if (!err) return res.status(201).send(docs);
-            if (err) return res.status(500).send(err.message);
-        }
-        );
-    } catch (err) {
-        
-    }
-}
 
 module.exports.deleteUser = async (req, res) => {
     if (!ObjectID.isValid(req.params.id))

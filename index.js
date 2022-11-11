@@ -2,6 +2,7 @@ const express = require('express')
 require('dotenv').config({path: './config/.env'});
 require('./config/db');
 const userRoutes = require('./Routes/user.route');
+const treeRoutes = require('./Routes/tree.route');
 const cors = require('cors'); 
 const cookieParser = require('cookie-parser');
 const {checkUser, requireAuth} = require('./middleware/auth.middleware');
@@ -34,7 +35,9 @@ app.get('/jwtid', requireAuth, (req, res) => {
   res.status(200).send(res.locals.user._id)
 });
 
-app.use('/api/user', userRoutes)
+app.use('/api/user', userRoutes);
+app.use('/api/tree', treeRoutes);
+
 
 app.listen(process.env.PORT, () => {
   console.log(`Example app listening on port ${process.env.PORT}`)

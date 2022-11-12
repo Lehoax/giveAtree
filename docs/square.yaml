@@ -1,0 +1,11 @@
+paths:
+  /square/create:
+      post:                 
+          tags:               
+            - Square            
+          summary: create square require admin authentification
+          produces:
+          - application/json
+          responses:          # server responses
+            201:
+              description: square id  

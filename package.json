@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "nodemon serve",
-    "swagger-autogen": "node swagger.js"
+    "swagger-autogen": "node ./config/swagger.js"
   },
   "dependencies": {
     "and": "^0.0.3",
@@ -14,6 +14,7 @@
     "mongoose": "^6.7.2",
     "nodemon": "^2.0.20",
     "swagger-autogen": "^2.22.0",
+    "swagger-jsdoc": "^6.2.5",
     "swagger-ui-express": "^4.6.0",
     "validator": "^13.7.0"
   }

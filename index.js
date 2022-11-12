@@ -9,12 +9,15 @@ const orderRoutes = require('./Routes/order.route');
 const cors = require('cors'); 
 const cookieParser = require('cookie-parser');
 const {checkUser, requireAuth, adminAuth} = require('./middleware/auth.middleware');
-
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./config/swagger');
 
 
 
 const app = express()
 
+// use swagger-Ui-express for your app documentation endpoint
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 const corsOption = {
   origin: process.env.CLIENT_URL,

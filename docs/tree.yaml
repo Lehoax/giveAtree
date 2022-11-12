@@ -1,0 +1,30 @@
+paths:
+  /tree/create:
+      post:                 # endpoint request type (post request)
+          tags:               # Tag property
+            - Tree            # Value of the tag
+          summary: create tree require admin authentification
+          produces:
+          - application/json
+          parameters:
+          - in: body
+            name: body params
+            description: json
+            schema:
+              $ref: '#/definitions/createTree' 
+            required: true   # can also be true depending on user preference
+          responses:          # server responses
+            201:
+              description: tree id  
+definitions:     
+  createTree:
+    type: object
+    properties:
+      specie: 
+        type: string
+      categorie:
+        type: string
+      price:
+        type: number
+      age:
+        type: number

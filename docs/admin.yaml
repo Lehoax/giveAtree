@@ -1,0 +1,11 @@
+paths:
+  /api/admin:
+      get:                 
+          tags:               
+            - Admin            
+          summary: Admin dashbord require admin authentification
+          produces:
+          - application/json
+          responses:          # server responses
+            200:
+              description: page  

@@ -1,0 +1,27 @@
+paths:
+  /order/create:
+      post:                 # endpoint request type (post request)
+          tags:               # Tag property
+            - Order            # Value of the tag
+          summary: create order require authentification
+          produces:
+          - application/json
+          parameters:
+          - in: body
+            name: body params
+            description: json
+            schema:
+              $ref: '#/definitions/createOrder' 
+            required: true   # can also be true depending on user preference
+          responses:          # server responses
+            201:
+              description: order object  
+definitions:     
+  createOrder:
+    type: object
+    properties:
+      userId: 
+        type: string
+      treeId:
+        type: string
+ 

@@ -1,8 +1,9 @@
 const router = require('express').Router();
-const treeCtrl = require('../controllers/tree.controller');
+const squareCtrl = require('../controllers/square.controller');
 const {adminAuth} = require('../middleware/auth.middleware');
 
+router.post('/create', adminAuth, squareCtrl.createSquare);
 
-router.post('/create', adminAuth, treeCtrl.createTree);
+
 
 module.exports = router;

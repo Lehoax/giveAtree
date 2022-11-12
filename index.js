@@ -5,6 +5,7 @@ const userRoutes = require('./Routes/user.route');
 const treeRoutes = require('./Routes/tree.route');
 const adminRoutes = require('./Routes/admin.route');
 const squareRoutes = require('./Routes/square.route');
+const orderRoutes = require('./Routes/order.route');
 const cors = require('cors'); 
 const cookieParser = require('cookie-parser');
 const {checkUser, requireAuth, adminAuth} = require('./middleware/auth.middleware');
@@ -41,6 +42,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/tree', treeRoutes);
 app.use('/api/admin', adminAuth ,adminRoutes);
 app.use('/api/square', adminAuth , squareRoutes);
+app.use('/api/order', requireAuth, orderRoutes);
 
 
 

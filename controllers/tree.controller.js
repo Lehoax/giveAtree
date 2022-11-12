@@ -15,13 +15,13 @@ module.exports.createTree = async (req, res) => {
 }
 
 
-module.exports.placedTree = async (req, res) => {
-    if (!ObjectID.isValid(req.params.id))
+module.exports.placedTree = async (id) => {
+    if (!ObjectID.isValid(id))
     return res.status(400).send("ID unknown : " + req.params.id);
 
     try {
         await TreeModel.findOneAndUpdate(
-        { _id: req.params.id },
+        { _id: id },
         {
             $set: {
             placed: true
@@ -29,8 +29,7 @@ module.exports.placedTree = async (req, res) => {
         },
         { new: true, upsert: true, setDefaultsOnInsert: true },
         (err, docs) => {
-            if (!err) return res.status(201).send(docs);
-            if (err) return res.status(500).send(err.message);
+            if (err) return console.log(err.message); 
         }
         );
     } catch (err) {

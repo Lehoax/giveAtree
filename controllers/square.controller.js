@@ -14,34 +14,32 @@ module.exports.createSquare = async (req, res) => {
 
 
 module.exports.setOrderInCase = async (orders) => {
-    if (!ObjectID.isValid(req.params.id))
-    return res.status(400).send("ID unknown : " + req.params.id);
-
-    try {
+       try {
         const square = await SquareModel.findOne({}, {}, { sort: { 'created_at' : -1 } }, function(err, square) {
             return square; 
-        });
+        }).clone();
         if (ObjectID(square._id)) {
-            await SquareModel.findOneAndUpdate(
-                { _id: square._id },
-                {
-                    $set: {
-                    case: [
-                        {
-                            _id: orders._id, 
-                            userId: orders.userId,
-                            TreeId: orders.treeId
-                        }
-                    ]
+            try {
+                await SquareModel.findOneAndUpdate(
+                    { _id: square._id },
+                    {
+                        $push: {
+                        case: [
+                            {
+                                _id: orders._id, 
+                                userId: orders.userId,
+                                treeId: orders.treeId
+                            }
+                        ]
+                        },
                     },
-                },
-                { new: true, upsert: true, setDefaultsOnInsert: true },
-                (err, docs) => {
-                    if (!err) return res.status(201).send(docs);
-                    if (err) return res.status(500).send(err.message);
-                }
-            );
-            
+                    { new: true, upsert: true, setDefaultsOnInsert: true },
+                    (err, docs) => {
+                        if (!err) return docs;
+                        if (err) return err.message;
+                    }
+                ).clone();
+            } catch (err) {console.log("-"+err)};
         }
    
     } catch (err) {console.log(err);}

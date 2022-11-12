@@ -56,6 +56,10 @@ const userSchema = new mongoose.Schema(
       },
       orders: {
         type: [Array]
+      },
+      admin: {
+        type: Boolean,
+        default: false
       }
     },
     {

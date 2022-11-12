@@ -3,9 +3,10 @@ require('dotenv').config({path: './config/.env'});
 require('./config/db');
 const userRoutes = require('./Routes/user.route');
 const treeRoutes = require('./Routes/tree.route');
+const adminRoutes = require('./Routes/admin.route');
 const cors = require('cors'); 
 const cookieParser = require('cookie-parser');
-const {checkUser, requireAuth} = require('./middleware/auth.middleware');
+const {checkUser, requireAuth, adminAuth} = require('./middleware/auth.middleware');
 
 
 
@@ -37,6 +38,7 @@ app.get('/jwtid', requireAuth, (req, res) => {
 
 app.use('/api/user', userRoutes);
 app.use('/api/tree', treeRoutes);
+app.use('/api/admin', adminAuth ,adminRoutes);
 
 
 app.listen(process.env.PORT, () => {

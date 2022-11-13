@@ -40,7 +40,7 @@ module.exports.signInErrors = (err) => {
     errors.email = "Email inconnu";
   
   if (err.message.includes('password'))
-    errors.password = "Le mot de passe ne correspond pas"
+    errors.password = "Mot de passe incorrect"
 
   return errors;
 };

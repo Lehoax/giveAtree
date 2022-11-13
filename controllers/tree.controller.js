@@ -10,7 +10,7 @@ module.exports.createTree = async (req, res) => {
       res.status(201).json({ tree: tree._id});
     }
     catch(err) {
-      res.status(200).send( res.error )
+      res.status(200).send(err)
     }
 }
 
@@ -27,7 +27,7 @@ module.exports.allTreeNotPlaced = async (req, res) => {
           });
     }
     catch(err) {
-      res.status(200).send( res.error )
+      res.status(200).send(err);
     }
 }
 
@@ -49,8 +49,6 @@ module.exports.placedTree = async (id) => {
             if (err) return console.log(err.message); 
         }
         );
-    } catch (err) {
-        
-    }
+    } catch (err) {}
 }
 

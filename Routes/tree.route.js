@@ -4,5 +4,7 @@ const {adminAuth} = require('../middleware/auth.middleware');
 
 
 router.post('/create', adminAuth, treeCtrl.createTree);
+router.get('/all', treeCtrl.allTreeNotPlaced);
+
 
 module.exports = router;

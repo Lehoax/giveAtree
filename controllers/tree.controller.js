@@ -14,6 +14,23 @@ module.exports.createTree = async (req, res) => {
     }
 }
 
+module.exports.allTreeNotPlaced = async (req, res) => {
+    try {
+        TreeModel.find({}, function(err, trees) {
+            let arr = [];
+            trees.map((tree) => {
+                if (tree.placed == false) {
+                    arr.push(tree);
+                }     
+            })  
+           res.status(200).json(arr);  
+          });
+    }
+    catch(err) {
+      res.status(200).send( res.error )
+    }
+}
+
 
 module.exports.placedTree = async (id) => {
     if (!ObjectID.isValid(id))

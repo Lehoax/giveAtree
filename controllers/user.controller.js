@@ -11,7 +11,7 @@ module.exports.getUser = async (req, res) => {
         if (!err) {
             res.send(docs);
         } else {
-            console.log('ID unknown : ' + err);
+            res.send(err);
         }
     }).select('pseudo orders createdAt')
     

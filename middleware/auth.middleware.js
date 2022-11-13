@@ -62,6 +62,6 @@ module.exports.adminAuth = async (req, res, next) => {
       }
     });
   } else {
-    res.send(403);
+    res.send('error').json(403);
   }
 };

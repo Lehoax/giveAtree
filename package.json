@@ -1,7 +1,8 @@
 {
   "scripts": {
     "start": "nodemon serve",
-    "swagger-autogen": "node ./config/swagger.js"
+    "swagger-autogen": "node ./config/swagger.js",
+    "test": "jest /tests"
   },
   "dependencies": {
     "and": "^0.0.3",

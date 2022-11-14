@@ -10,7 +10,7 @@ const AuthForm= () => {
 
   return (
     <>
-    {signIn == true ?(
+    {signIn === true ?(
       <>
         <button onClick={()=> setSignIn(false)}>Inscription</button>
         <SignInForm/>

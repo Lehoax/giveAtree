@@ -45,7 +45,7 @@ app.get('/jwtid', requireAuth, (req, res) => {
 app.use('/api/user', userRoutes);
 app.use('/api/tree', treeRoutes);
 app.use('/api/admin', adminAuth ,adminRoutes);
-app.use('/api/square', adminAuth , squareRoutes);
+app.use('/api/square' , squareRoutes);
 app.use('/api/order', requireAuth, orderRoutes);
 
 

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import './App.css';
-import AuthForm from './AuthForm';
 import axios from 'axios';
+import AuthForm from './AuthForm';
+import HomeSquare from './Homesquare';
 
 function App() {
   const [uid, setUid] = useState(null);
@@ -30,6 +31,7 @@ function App() {
       ):(
         <AuthForm />
       )}
+      <HomeSquare/>
     </div>
   );
 }

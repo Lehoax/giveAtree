@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
+import Square from "./Square";
 
 
 const HomeSquare= () => {
@@ -30,9 +31,7 @@ const HomeSquare= () => {
 
     ): (
       <>
-        {squares.map((square)=>{
-            return <li>{square._id}</li>
-        })}
+        <Square square={squares}/>
       </>
     )}
      

@@ -66,3 +66,20 @@ module.exports.seeTree = async (req, res) => {
     } catch (err) {}
 }
 
+module.exports.allTreePlaced = async (req, res) => {
+    try {
+        TreeModel.find({}, function(err, trees) {
+            let arr = [];
+            trees.map((tree) => {
+                if (tree.placed == true) {
+                    arr.push(tree);
+                }     
+            })  
+           res.status(200).json(arr);  
+          });
+    }
+    catch(err) {
+      res.status(200).send(err);
+    }
+}
+

@@ -55,3 +55,14 @@ module.exports.deleteUser = async (req, res) => {
       return res.status(500).json({ message: err });
     }
   };
+
+module.exports.getAllUser = async (req, res) =>{
+    try {
+        UserModel.find({}, function(err, users) {
+           res.status(200).json(users);  
+          });
+    }
+    catch(err) {
+      res.status(200).send(err);
+    }
+}

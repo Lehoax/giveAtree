@@ -52,3 +52,17 @@ module.exports.placedTree = async (id) => {
     } catch (err) {}
 }
 
+module.exports.seeTree = async (req, res) => {
+    if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send("ID unknown : " + req.params.id);
+
+    try {
+        await TreeModel.findById({ _id: req.params.id },
+        (err, docs) => {
+            if (err) return res.status(500).send(err);
+            else res.status(200).send(docs);
+        }
+        );
+    } catch (err) {}
+}
+

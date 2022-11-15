@@ -12,8 +12,8 @@ router.get('/logout', authController.logout);
 
 //users
 
+router.get('/all', userCtrl.getAllUser);
 router.get('/:id', requireAuth, userCtrl.getUser);
-router.get('/all', requireAuth, userCtrl.getAllUser);
 router.patch('/update/:id', requireAuth, userCtrl.updateUser);
 router.delete('/delete/:id', requireAuth, userCtrl.deleteUser);
 

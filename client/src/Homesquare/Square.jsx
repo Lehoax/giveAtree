@@ -1,70 +1,135 @@
 import axios from "axios";
-import React, {useEffect, useState} from "react";
-import './square.css'
+import React, { useEffect, useState } from "react";
+import './square.css';
 
+const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
 
 const Square = (props) => {
-    const[user, setUser] = useState('');
-    const[tree, setTree] = useState('');
-    const[squareMaked, setSquareMaked] = useState(false);
-    const[requestMaked, setrequestMaked] = useState(false);
+    const [users, setUsers] = useState([]);
+    const [trees, setTrees] = useState([]);
+    const [squareMaked, setSquareMaked] = useState(false);
+    const [requestMaked, setrequestMaked] = useState(false);
     const [casesArr, setCaseArr] = useState([]);
 
 
-    const makeSquare = () =>{
+
+    const makeSquare = () => {
         let squareSize = 1000;
         let incrementMap = 0;
-        console.log(props);
-        for (let i = 0; squareSize !== i; i++){
-            console.log(i);
+        for (let i = 0; squareSize !== i; squareSize--) {
             if (props.square.length !== incrementMap) {
                 const squareArr = props.square
                 squareArr.map((squareCase) => {
-                   
-                    casesArr.push(<li key={squareCase._id} id={user._id+"----"+tree._id} className="case"></li>)
-                })
-            }else{
-                    casesArr.push(<li key={squareSize} className="case"></li>)
-                }
-        }
-    } 
+                    setUsers(users.join('').split(','))
+                    users[0].map((user) => {
+                        if (user._id === squareCase.userId) {
+                            setTrees(trees.join('').split(','))
+                            trees[0].map((tree) => {
+                                if (tree._id === squareCase.treeId) {
+                                    casesArr.push(<>
+                                        <div id="overlay3">
+                                    <div className="popup_block">
+                                        <a className="close" href="#noWhere">close</a>
+                                        <h2>{user.pseudo}</h2>
+            
+                                        <p>{tree.specie} </p>
+                                        <p>{tree.age} ans</p>
 
-    useEffect(()=>{
-        if (squareMaked === false) {
-            makeSquare();
-            setSquareMaked(true);
-        }
-        if (requestMaked == false) {
-            axios({
-                method: "get",
-                url: `${process.env.REACT_APP_API_URL}api/user/all`,
-                withCredentials: true})
-                .then((res) => {
-                    setUser(res);
+                                        <p>{tree.categorie} </p>
+                                        <p>{tree.price.$numberDecimal} € </p>                                        
+                                    </div>
+                                </div>
+                                    <a href="#overlay3" className={tree.categorie}><li  key={squareCase._id} className="case"></li></a></>);
+                                    setCaseArr(casesArr);
+                                    incrementMap++;
+                                }
+                            })
+                        }
+                    })
                 })
-                .catch((err) => {console.log(err);});
-            axios({
-                method: "get",
-                url: `${process.env.REACT_APP_API_URL}api/tree/all`,
-                withCredentials: true})
-                .then((res) => {
-                    setTree(res);
-                })
-                .catch((err) => {console.log(err);});
-                setrequestMaked(true);
+            } else {
+                casesArr.push(<li key={squareSize} className="case"></li>);
+                setCaseArr(casesArr);
+            }
         }
+    }
 
-    },[squareMaked])
+    useEffect(() => {
+        let success = new Array;
+
+        if (requestMaked === false) {
+            fetchData();
+            async function fetchData() {
+
+                    await axios({
+                        method: "get",
+                        url: `${process.env.REACT_APP_API_URL}api/user/all`,
+                        withCredentials: true
+                    })
+                        .then((res) => {
+                            console.log(res.data);
+                            setUsers(users.push(res.data));
+                            success += 'true,';
+                            try{
+                                success = success.split(" ");
+                            }catch(err){}
+                            if (success[0] === 'true' && success[1] === 'true') {
+                                makeSquare();
+                                setSquareMaked(true);
+                            }
+                        })
+                        .catch((err) => { console.log(err); });
+                    await axios({
+                        method: "get",
+                        url: `${process.env.REACT_APP_API_URL}api/tree/all-placed`,
+                        withCredentials: true
+                    })
+                        .then((res) => {
+                            console.log(res.data);
+                            setTrees(trees.push(res.data));
+                            success += 'true';
+                            try{
+                                success = success.split(",");
+                            }catch(err){}
+                            if (success[0] === 'true' && success[1] === 'true') {
+                                makeSquare();
+                                setSquareMaked(true);
+                            }
+
+                        })
+                        .catch((err) => { console.log(err); });
+                    setrequestMaked(true);
+
+                           
+        }
+    }
+     if(requestMaked){
+        
+    }            
+
+
+    }, [squareMaked])
 
     return (
         <>
-            {squareMaked ?(
+            {squareMaked && requestMaked ? (
                 <div className="square-container">
-                    {casesArr.map((one_case)=>{return one_case})}
+                    {casesArr.map((one_case) => { return one_case })}
+                    
                 </div>
-            ):(
+            ) : (
                 <h3>loading</h3>
             )}
+              
         </>
     );
 };

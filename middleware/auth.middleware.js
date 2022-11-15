@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/user.model");
+let token;
+
 
 module.exports.checkUser = (req, res, next) => {
   const token = req.cookies.jwt;
@@ -22,7 +24,7 @@ module.exports.checkUser = (req, res, next) => {
 };
 
 module.exports.requireAuth = (req, res, next) => {
-  const token = req.cookies.jwt;
+  token = req.cookies.jwt;
   if (token) {
     jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
       if (err) {
@@ -38,15 +40,18 @@ module.exports.requireAuth = (req, res, next) => {
   }
 };
 
-module.exports.adminAuth = async (req, res, next) => {
-  const token = req.cookies.jwt;
+module.exports.adminAuth = (req, res, next) => {
+
+console.log(token);
   if (token) {
+
     jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
       if (err) {
         console.log(err);
         res.send(403).json('no token');
       } else{
           UserModel.findById(decodedToken.id, function(err, result) {
+            console.log(result);
           if (err) {
            console.log("err");  
           } else {
@@ -62,6 +67,6 @@ module.exports.adminAuth = async (req, res, next) => {
       }
     });
   } else {
-    res.send('error').json(403);
+    res.status(403).json({error: "no token"});
   }
 };

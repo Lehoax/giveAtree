@@ -21,7 +21,6 @@ const Square = (props) => {
     const [casesArr, setCaseArr] = useState([]);
 
 
-
     const makeSquare = () => {
         let squareSize = 1000;
         let incrementMap = 0;
@@ -69,7 +68,6 @@ const Square = (props) => {
         if (requestMaked === false) {
             fetchData();
             async function fetchData() {
-
                     await axios({
                         method: "get",
                         url: `${process.env.REACT_APP_API_URL}api/user/all`,

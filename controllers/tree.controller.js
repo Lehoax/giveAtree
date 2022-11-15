@@ -4,9 +4,9 @@ const ObjectID = require("mongoose").Types.ObjectId;
 
 module.exports.createTree = async (req, res) => {
     const {specie, categorie, price, age} = req.body
-
     try {
       const tree = await TreeModel.create({specie, categorie, price, age});
+      console.log(tree);
       res.status(201).json({ tree: tree._id});
     }
     catch(err) {

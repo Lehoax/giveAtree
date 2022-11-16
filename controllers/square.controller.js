@@ -48,13 +48,7 @@ module.exports.setOrderInCase = async (orders) => {
 module.exports.allTreeSquare = async (req, res) => {
     try {
         SquareModel.find({}, function(err, squares) {
-            let arr = [];
-            squares.map((square) => {
-                square.case.map((casee) => {
-                    arr.push(casee);
-                })
-            })  
-           res.status(200).json(arr);  
+           res.status(200).json(squares[0].case);  
           });
     } catch (err) {console.log(err);}
 }

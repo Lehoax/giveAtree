@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
 import Square from "./Square";
+import TreeList from './TreeList';
+import './index.css'
 
 
 const HomeSquare= () => {
@@ -31,7 +33,11 @@ const HomeSquare= () => {
 
     ): (
       <>
-        <Square square={squares}/>
+      <div className="home-container">
+      <TreeList/>
+
+        <Square square={squares} />
+      </div>
       </>
     )}
      

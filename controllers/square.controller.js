@@ -49,6 +49,6 @@ module.exports.allTreeSquare = async (req, res) => {
     try {
         SquareModel.find({}, function(err, squares) {
            res.status(200).json(squares[0].case);  
-          });
+        });
     } catch (err) {console.log(err);}
 }

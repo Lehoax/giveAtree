@@ -36,7 +36,7 @@ module.exports.requireAuth = (req, res, next) => {
       }
     });
   } else {
-    res.send(403);
+    res.status(403).json('no valid token');
   }
 };
 

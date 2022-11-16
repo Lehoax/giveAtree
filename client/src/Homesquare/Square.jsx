@@ -21,9 +21,13 @@ const Square = (props) => {
     const [casesArr, setCaseArr] = useState([]);
 
 
+  
+
+
 
     const newOrder = evt => {
-        const uid = props.uid.uid;
+        console.log(props);
+        const uid = props.uid;
         navigator.clipboard.readText()
         .then(text => {
             const inputfield = evt.target
@@ -31,10 +35,12 @@ const Square = (props) => {
             axios({
                 method: "post",
                 url: `${process.env.REACT_APP_API_URL}api/order/create`,
+                withCredentials: true,
                 data: {userId: uid, treeId: text}
             }).then((res) => {
                 console.log(res);
             }).catch((err) => console.log(err))
+
         })
         .catch(err => {
             console.error('Failed to read clipboard contents: ', err);
@@ -51,6 +57,8 @@ const Square = (props) => {
         for (let i = 0; squareSize !== i; squareSize--) {
             if (props.square.length !== incrementMap) {
                 const squareArr = props.square
+                console.log(squareArr);
+                console.log(incrementMap);
                 squareArr.map((squareCase) => {
                     setUsers(users.join('').split(','))
                     users[0].map((user) => {
@@ -82,8 +90,6 @@ const Square = (props) => {
                 casesArr.push(<input key={increment} onClick={newOrder} className="case"></input>)
                 setCaseArr(casesArr);
                 increment++
-
-
             }
         }
     }

@@ -43,6 +43,8 @@ function App() {
       {uid != null ? (
         <>
         <h4>Logged {uid}</h4>
+        <HomeSquare uid={uid}/>
+
         {user && user.admin == true &&(
         <AdminPage/>
         )}
@@ -51,7 +53,6 @@ function App() {
         <AuthForm />
       )}
   
-      <HomeSquare/>
      
     </div>
   );

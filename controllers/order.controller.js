@@ -8,8 +8,8 @@ const ObjectID = require("mongoose").Types.ObjectId;
 module.exports.newOrder = async (req, res) => {
     const {userId, treeId} = req.body;
     try {
-        treeCtrl.placedTree(treeId);
-        const order = OrderModel.create({userId, treeId});
+        const order = await OrderModel.create({userId, treeId});
+        await treeCtrl.placedTree(treeId);
         if (ObjectID(order._id)) {
             squareCtrl.setOrderInCase(order);
             return res.send(order).json(201);

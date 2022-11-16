@@ -5,10 +5,10 @@ import TreeList from './TreeList';
 import './index.css'
 
 
-const HomeSquare= () => {
+const HomeSquare= ({uid}) => {
   const [squares, setSquare] = useState(null);
   const [isSend, setIsSend] = useState(false);
-
+  const userid = uid;
 
   useEffect(()=>{
     if (isSend === false) {
@@ -36,7 +36,7 @@ const HomeSquare= () => {
       <div className="home-container">
       <TreeList/>
 
-        <Square square={squares} />
+        <Square square={squares} uid={userid}/>
       </div>
       </>
     )}

@@ -1,17 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import './square.css';
+import './square.scss';
+import Case from "./Case";
+import { ObjectID  } from "mongoose";
 
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-    },
-};
+
+
 
 const Square = (props) => {
     const [users, setUsers] = useState([]);
@@ -20,82 +14,73 @@ const Square = (props) => {
     const [requestMaked, setrequestMaked] = useState(false);
     const [casesArr, setCaseArr] = useState([]);
 
-
-  
+    var squareJson = props.square
+    var squareArr = []
 
 
 
     const newOrder = evt => {
-        console.log(props);
         const uid = props.uid;
         navigator.clipboard.readText()
-        .then(text => {
-            const inputfield = evt.target
-            console.log('Pasted content: ', text);
-            axios({
-                method: "post",
-                url: `${process.env.REACT_APP_API_URL}api/order/create`,
-                withCredentials: true,
-                data: {userId: uid, treeId: text}
-            }).then((res) => {
-                console.log(res);
-            }).catch((err) => console.log(err))
+            .then(text => {
+                const inputfield = evt.target
+                console.log('Pasted content: ', text);
+                if (text.length === 24) {
+                    axios({
+                        method: "post",
+                        url: `${process.env.REACT_APP_API_URL}api/order/create`,
+                        withCredentials: true,
+                        data: { userId: uid, treeId: text }
+                    }).then((res) => {
+                        window.location.href = "https://buy.stripe.com/test_cN28zX1MLdvM3Ic5kl" 
+                    }).catch((err) => console.log(err))
+                }else{
+                    document.getElementById('newTreeErrors').innerHTML = 'veuillez selectionner un arbre'
+                }
+                   
+            })
+            .catch(err => {
+                console.error('Failed to read clipboard contents: ', err);
+            });
 
-        })
-        .catch(err => {
-            console.error('Failed to read clipboard contents: ', err);
-        });
-    
     };
-
-
 
     const makeSquare = () => {
         let increment = 1;
         let squareSize = 1000;
         let incrementMap = 0;
         for (let i = 0; squareSize !== i; squareSize--) {
+            console.log();
             if (props.square.length !== incrementMap) {
                 const squareArr = props.square
                 console.log(squareArr);
                 console.log(incrementMap);
                 squareArr.map((squareCase) => {
-                    setUsers(users.join('').split(','))
                     users[0].map((user) => {
-                        if (user._id === squareCase.userId) {
-                            trees[0].map((tree) => {
-                                if (tree._id === squareCase.treeId) {
-                                    casesArr.push(<>
-                                        <div id="overlay3">
-                                            <div className="popup_block">
-                                                <a className="close" href="#noWhere">close</a>
-                                                <h2>{user.pseudo}</h2>
+                        trees[0].map((tree) => {
+                            if (tree._id === squareCase.treeId && user._id === squareCase.userId) {
+                                
+                                casesArr.push(<Case user={user} tree={tree} squareCase={squareCase}/>)
+                                    incrementMap++
+                                    increment++
 
-                                                <p>{tree.specie} </p>
-                                                <p>{tree.age} ans</p>
-
-                                                <p>{tree.categorie} </p>
-                                                <p>{tree.price.$numberDecimal} € </p>
-                                            </div>
-                                        </div>
-                                        <a href="#overlay3" className={tree.categorie}><li key={squareCase._id} className="case"></li></a></>);
-                                        setCaseArr(casesArr);
-                                        incrementMap++
-                                }
-                            })
-                        }
+                            }
+                        })
                     })
                 })
+                console.log(casesArr);
             } else {
                 casesArr.push(<input key={increment} onClick={newOrder} className="case"></input>)
                 setCaseArr(casesArr);
                 increment++
             }
         }
+
+
     }
 
     useEffect(() => {
-   
+
 
 
         let success = new Array;
@@ -109,7 +94,6 @@ const Square = (props) => {
                     withCredentials: true
                 })
                     .then((res) => {
-                        console.log(res.data);
                         setUsers(users.push(res.data));
                         success += 'true,';
                         try {
@@ -127,7 +111,6 @@ const Square = (props) => {
                     withCredentials: true
                 })
                     .then((res) => {
-                        console.log(res.data);
                         setTrees(trees.push(res.data));
                         success += 'true';
                         try {
@@ -145,21 +128,22 @@ const Square = (props) => {
 
             }
         }
-        
-       
+
+
     }, [squareMaked])
 
 
     return (
         <>
-            {squareMaked && requestMaked ? (
-                <div className="square-container">
-                    {casesArr.map((one_case) => { return one_case })}
-                </div>
-            ) : (
-                <h3>loading</h3>
-            )}
+            {squareMaked == true && requestMaked == true ?(
+    <div className="square-container">
+                    
+    {casesArr.map((arrcase) => {return arrcase})}
+    </div>
+            ): null}
+                   <p id="newTreeErrors"></p>
 
+     
         </>
     );
 };

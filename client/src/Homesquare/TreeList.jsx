@@ -40,7 +40,14 @@ const TreeList = () => {
     return (
         <>
             {requestMaked ? (
-                <div>
+                <div >
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                
                     {trees.map((tree) => { return <Tree props={tree} />  })}
                     </div>
             ) : (

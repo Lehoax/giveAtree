@@ -1,0 +1,23 @@
+.case {
+    width: 11px;
+    height: auto;
+    border: 2px solid black;
+    list-style: none;
+    flex: 1 0 auto;
+}
+
+.square-container {
+    height: 375px;
+    width: 550px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.fruitier {
+    background-color: palevioletred;
+}
+
+.biodiversite {
+    background-color: green;
+}
+

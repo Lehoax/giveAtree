@@ -14,6 +14,7 @@ module.exports.createSquare = async (req, res) => {
 
 
 module.exports.setOrderInCase = async (orders) => {
+    console.log(orders);
        try {
         const square = await SquareModel.findOne({}, {}, { sort: { 'created_at' : -1 } }, function(err, square) {
             return square; 
@@ -35,10 +36,11 @@ module.exports.setOrderInCase = async (orders) => {
                     },
                     { new: true, upsert: true, setDefaultsOnInsert: true },
                     (err, docs) => {
+                        console.log('placed in square');
                         if (!err) return docs;
                         if (err) return err.message;
                     }
-                ).clone();
+                );
             } catch (err) {console.log("-"+err)};
         }
    

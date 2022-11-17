@@ -25,6 +25,7 @@ const TreeForm = () => {
                 age,
                 price,
             },
+            withCredentials: true,
         })
             .then((res) => {
                 console.log(res);

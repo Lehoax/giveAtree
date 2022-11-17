@@ -9,6 +9,7 @@ module.exports.newOrder = async (req, res) => {
     const {userId, treeId} = req.body;
     try {
         const order = await OrderModel.create({userId, treeId});
+        console.log("order");
         await treeCtrl.placedTree(treeId);
         if (ObjectID(order._id)) {
             squareCtrl.setOrderInCase(order);
@@ -21,3 +22,4 @@ module.exports.newOrder = async (req, res) => {
         console.log(err.message);
     }
 }
+

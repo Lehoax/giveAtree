@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import Tree from "./Tree";
+import './treelist.css'
 
 
 const TreeList = () => {
@@ -40,16 +41,9 @@ const TreeList = () => {
     return (
         <>
             {requestMaked ? (
-                <div >
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                
+                <div className="treelist">
                     {trees.map((tree) => { return <Tree props={tree} />  })}
-                    </div>
+                </div>
             ) : (
                 <h3>loading</h3>
             )}

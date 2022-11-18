@@ -3,6 +3,7 @@ import axios from 'axios';
 import Square from "./Square";
 import TreeList from './TreeList';
 import './index.css'
+import CaseEmpty from "./CaseEmpty";
 
 
 const HomeSquare= ({uid}) => {
@@ -33,11 +34,11 @@ const HomeSquare= ({uid}) => {
 
     ): (
       <>
-      <div className="home-container">
-      <TreeList/>
+              <div className="home-content">
 
+        <TreeList/>
         <Square square={squares} uid={userid}/>
-      </div>
+        </div>
       </>
     )}
      

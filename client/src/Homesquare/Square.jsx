@@ -2,10 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import './square.scss';
 import Case from "./Case";
-import { ObjectID  } from "mongoose";
 
-
-
+import './modal.scss';
+import CaseEmpty from "./CaseEmpty";
 
 const Square = (props) => {
     const [users, setUsers] = useState([]);
@@ -19,31 +18,7 @@ const Square = (props) => {
 
 
 
-    const newOrder = evt => {
-        const uid = props.uid;
-        navigator.clipboard.readText()
-            .then(text => {
-                const inputfield = evt.target
-                console.log('Pasted content: ', text);
-                if (text.length === 24) {
-                    axios({
-                        method: "post",
-                        url: `${process.env.REACT_APP_API_URL}api/order/create`,
-                        withCredentials: true,
-                        data: { userId: uid, treeId: text }
-                    }).then((res) => {
-                        window.location.href = "https://buy.stripe.com/test_cN28zX1MLdvM3Ic5kl" 
-                    }).catch((err) => console.log(err))
-                }else{
-                    document.getElementById('newTreeErrors').innerHTML = 'veuillez selectionner un arbre'
-                }
-                   
-            })
-            .catch(err => {
-                console.error('Failed to read clipboard contents: ', err);
-            });
-
-    };
+   
 
     const makeSquare = () => {
         let increment = 1;
@@ -59,10 +34,10 @@ const Square = (props) => {
                     users[0].map((user) => {
                         trees[0].map((tree) => {
                             if (tree._id === squareCase.treeId && user._id === squareCase.userId) {
-                                
-                                casesArr.push(<Case user={user} tree={tree} squareCase={squareCase}/>)
-                                    incrementMap++
-                                    increment++
+
+                                casesArr.push(<Case user={user} tree={tree} squareCase={squareCase} />)
+                                incrementMap++
+                                increment++
 
                             }
                         })
@@ -70,7 +45,7 @@ const Square = (props) => {
                 })
                 console.log(casesArr);
             } else {
-                casesArr.push(<input key={increment} onClick={newOrder} className="case"></input>)
+                casesArr.push(<CaseEmpty uid={props.uid} key={increment} id={increment}/>)
                 setCaseArr(casesArr);
                 increment++
             }
@@ -135,15 +110,16 @@ const Square = (props) => {
 
     return (
         <>
-            {squareMaked == true && requestMaked == true ?(
-    <div className="square-container">
-                    
-    {casesArr.map((arrcase) => {return arrcase})}
-    </div>
-            ): null}
-                   <p id="newTreeErrors"></p>
+            
+            {squareMaked == true && requestMaked == true ? (
+                <div className="square-container">
+                    <div>
+            <p id="TreeOrderErrors"> </p>
+            </div>
+                    {casesArr.map((arrcase) => { return arrcase })}
+                </div>
+            ) : null}
 
-     
         </>
     );
 };

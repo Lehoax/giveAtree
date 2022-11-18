@@ -9,11 +9,12 @@ const orderRoutes = require('./Routes/order.route');
 const cors = require('cors'); 
 const cookieParser = require('cookie-parser');
 const {checkUser, requireAuth, adminAuth} = require('./middleware/auth.middleware');
-const stripe = require('stripe')('sk_test_51M4w4eB3Qdm0mZdRiD36WVIhrccVWcExcvLAvrVMlpnAFNZRNMBn6OKzvSh2JiXxbS27rzXyfm4b00O5akJoHETJ001hesCE8t');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger');
+// This is your test secret API key.
+const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 
-const YOUR_DOMAIN = 'http://localhost:5000';
+
 
 const app = express()
 
@@ -42,25 +43,29 @@ app.get('*', checkUser);
 app.get('/jwtid', requireAuth, (req, res) => {
   res.status(200).send(res.locals.user._id)
 });
+      
+ 
+const calculateOrderAmount = items => {
+  // Replace this constant with a calculation of the order's amount
+  // Calculate the order total on the server to prevent
+  // people from directly manipulating the amount on the client
+  return 1400;
+};
 
-app.post('/create-checkout-session', async (req, res) => {
-  const session = await stripe.checkout.sessions.create({
-    payment_method_type: ["card"],
-    line_items: [
-      {
-        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-        price: 'price_1M4wOJB3Qdm0mZdRMRLCia4B',
-        quantity: 1,
-      },
-    ],
-    mode: 'payment',
-    success_url: `${YOUR_DOMAIN}?success=true`,
-    cancel_url: `${YOUR_DOMAIN}?canceled=true`,
-  })
 
-  res.json(session.url).status(303);
+app.post("/create-payment-intent", async (req, res) => {
+  const { items } = req.body;
+  // Create a PaymentIntent with the order amount and currency
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: calculateOrderAmount(items),
+    currency: "usd"
+  });
+
+  res.send({
+    clientSecret: paymentIntent.client_secret
+  });
 });
-
+  
 
 app.use('/api/user', userRoutes);
 app.use('/api/tree', treeRoutes);

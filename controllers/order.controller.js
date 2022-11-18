@@ -5,6 +5,7 @@ const TreeModel = require('../models/tree.model');
 const ObjectID = require("mongoose").Types.ObjectId;
 
 
+
 module.exports.newOrder = async (req, res) => {
     const {userId, treeId} = req.body;
     try {
@@ -13,7 +14,7 @@ module.exports.newOrder = async (req, res) => {
         await treeCtrl.placedTree(treeId);
         if (ObjectID(order._id)) {
             squareCtrl.setOrderInCase(order);
-            return res.send(order).json(201);
+            return res.status(201);
         } else {
             return res.send(err.message).json(500);
         }

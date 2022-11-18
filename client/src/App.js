@@ -40,15 +40,14 @@ function App() {
   return (
     <div className="App">
       <h4>app</h4>
-      {uid != null ? (
-        <>
-        <h4>Logged {uid}</h4>
-        <HomeSquare uid={uid}/>
-
-        {user && user.admin == true &&(
+      {user && user.admin == true &&(
         <AdminPage/>
         )}
-        </>
+      {uid != null ? (
+        <div>
+        <h4>Logged {uid}</h4>
+        <HomeSquare uid={uid}/>
+        </div>
       ):(
         <AuthForm />
       )}

@@ -6,7 +6,6 @@ import './modal.scss';
 
 const Case = ({ user, tree, squareCase }) => {
 
-
     console.log(tree);
     return (
         <>
@@ -37,10 +36,6 @@ const Case = ({ user, tree, squareCase }) => {
                     </div>
                 </div>
             </details>
-
-
-
-
 
         </>)
 }

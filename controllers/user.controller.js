@@ -13,7 +13,7 @@ module.exports.getUser = async (req, res) => {
         } else {
             res.send(err);
         }
-    }).select('pseudo orders createdAt admin')
+    }).select('pseudo orders createdAt admin email')
     
 }
 

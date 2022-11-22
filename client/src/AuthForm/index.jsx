@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
-
+import './index.scss'
 
 const AuthForm= () => {
 
@@ -11,16 +11,17 @@ const AuthForm= () => {
   return (
     <>
     {signIn === true ?(
-      <>
-        <button onClick={()=> setSignIn(false)}>Inscription</button>
+      <div>
+
+        <button onClick={()=> setSignIn(false)} className="login-or-connexion">Inscription</button>
         <SignInForm/>
-      </>
+      </div>
 
     ): (
-      <>
-        <button onClick={()=> setSignIn(true)}>Connexion</button>
+      <div>
+        <button onClick={()=> setSignIn(true)} className="login-or-connexion" >Connexion</button>
         <SignUpForm />
-      </>
+      </div>
     )}
      
     </>

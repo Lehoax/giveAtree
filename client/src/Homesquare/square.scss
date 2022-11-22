@@ -1,14 +1,16 @@
 .case {
-    width: 11px;
-    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 5px;
+    width: 15px;
+    height: 15px;
     border: 2px solid black;
     list-style: none;
-    flex: 1 0 auto;
 }
 
 .square-container {
     height: 375px;
-    width: 550px;
+    width: 635px;
     display: flex;
     flex-wrap: wrap;
 }

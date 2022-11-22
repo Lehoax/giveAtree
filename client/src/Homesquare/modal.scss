@@ -130,9 +130,11 @@ body {
 // -------------- DETAILS
 
 details {
+    height: 15px;
+    width: 15px;
     summary {
         list-style: none;
-        width: 11px;
+        width: auto;
         height: auto;
     
 
@@ -143,6 +145,9 @@ details {
         &::-webkit-details-marker {
             display: none;
         }
+    }
+    summary:hover{
+        cursor:pointer;
     }
 }
 

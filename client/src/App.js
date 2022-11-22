@@ -4,6 +4,8 @@ import axios from 'axios';
 import AuthForm from './AuthForm';
 import HomeSquare from './Homesquare';
 import AdminPage from './AdminPage';
+import homeTree from "./home-tree.jpg"
+import Profil from './Profil';
 
 function App() {
   const [uid, setUid] = useState(null);
@@ -39,17 +41,26 @@ function App() {
   
   return (
     <div className="App">
-      <h4>app</h4>
+    <div className="container-title">
+      <h1 id='app-title'>Give a tree</h1>
+      <p>Planter un arbre pour la collectivité, association loi 1901, vos dons sont déductibles de vos impôts</p>
+    </div>
+
       {user && user.admin == true &&(
         <AdminPage/>
         )}
       {uid != null ? (
         <div>
-        <h4>Logged {uid}</h4>
         <HomeSquare uid={uid}/>
+        <Profil uid={uid}/>
         </div>
       ):(
+        <div className="home-form">
+          <a href="https://fr.freepik.com/vecteurs-libre/arbre_6132448.htm#query=tree&position=9&from_view=search&track=sph" target="_blank">
+            <img src={homeTree} id="home-tree" />
+          </a>
         <AuthForm />
+        </div>
       )}
   
      

@@ -110,14 +110,16 @@ const Square = (props) => {
 
     return (
         <>
-            
+              
             {squareMaked == true && requestMaked == true ? (
+                <>
                 <div className="square-container">
-                    <div>
-            <p id="TreeOrderErrors"> </p>
-            </div>
+                  
                     {casesArr.map((arrcase) => { return arrcase })}
+         
                 </div>
+                           
+                </>
             ) : null}
 
         </>

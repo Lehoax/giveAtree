@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+.home-form{
+  display: flex;
+}
+
+#home-tree{
+  width: 30em;
+}
+
+#app-title{
+  margin-bottom: 5%;
+}
+.container-title{
+  margin-bottom: 20%;
+}

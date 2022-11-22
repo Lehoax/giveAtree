@@ -1,7 +1,7 @@
 .treelist{
     display: flex;
     width: 550px;
-    height: 400px;
+    height: 500px;
     flex-wrap: wrap;
     overflow-y: scroll;
     margin-right: 15%;

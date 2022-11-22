@@ -58,3 +58,10 @@
 .button-4:-webkit-details-marker {
     display: none;
 }
+
+.cursor{
+    cursor:url(../tree.png), auto;
+}
+.yellow{
+    background-color: yellow;
+}

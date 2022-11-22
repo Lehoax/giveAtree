@@ -1,4 +1,4 @@
-import react from 'react';
+import React from 'react';
 import './tree.css'
 import './index.css'
 
@@ -12,8 +12,12 @@ const Tree = ({props}) => {
     function copyToClipboard(id) {     
       console.log(id);
       navigator.clipboard.writeText(id);
-      document.getElementById("tree"+id).style.cssText += 'display:none;';
-      }
+      document.getElementById("tree"+id).style.cssText += 'opacity:.3;';
+      document.getElementById("tree"+id).onclick = null;
+      document.getElementById('TreeOrderErrors').innerHTML = '';
+      document.getElementById('TreeOrderErrors').innerHTML = 'Vous pouvez planter votre arbre';
+      document.getElementById('home-cursor').classList.add('cursor');
+    }
     return (
         <>
         <div className="tree" id={"tree"+id}>

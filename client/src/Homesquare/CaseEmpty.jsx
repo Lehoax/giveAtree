@@ -5,6 +5,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import "./caserEmpty.css";
+import Case from "./Case";
 
 
 const promise = loadStripe(process.env.REACT_APP_API_KEY);
@@ -41,7 +42,7 @@ export default function CaserEmpty(props) {
     navigator.clipboard.readText()
         .then(text => {
             const inputfield = document.getElementById(caseId);
-            console.log(inputfield);
+            inputfield.classList.add('yellow')
             console.log('Pasted content: ', text);
             if (text.length === 24) {
                 axios({
@@ -59,7 +60,8 @@ export default function CaserEmpty(props) {
                     }).catch((err) => console.log(err))
 
                 }).catch((err) => console.log(err))
-
+                document.getElementById('TreeOrderErrors').innerHTML = '';
+                navigator.clipboard.writeText("1").then()
             } else {
                 document.getElementById('TreeOrderErrors').innerHTML = 'veuillez selectionner un arbre'
             }
@@ -72,6 +74,8 @@ export default function CaserEmpty(props) {
 };
 
 const pull_data = (data) => {
+  document.getElementById('home-cursor').classList.remove('cursor');
+
   console.log(data); 
   if (data === true) {
     newOrder()

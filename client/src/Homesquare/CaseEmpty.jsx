@@ -4,8 +4,7 @@ import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
-import "./caserEmpty.css";
-import Case from "./Case";
+import "./caseEmpty.css";
 
 
 const promise = loadStripe(process.env.REACT_APP_API_KEY);
@@ -31,8 +30,6 @@ export default function CaserEmpty(props) {
     }).catch(err => {
       console.error('Failed to read clipboard contents: ', err);
   });
-    
-
   }
 
  

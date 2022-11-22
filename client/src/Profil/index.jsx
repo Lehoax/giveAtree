@@ -10,6 +10,8 @@ const Profil = ({uid}) => {
     const [city, setCity] = useState("");
     const [cp, setCp] = useState("");
     const [user, setUser] = useState(null);
+    const [tree, setTree] = useState(null);
+
 
 
 
@@ -55,7 +57,21 @@ const Profil = ({uid}) => {
         if (user === null) {
             getUserData(uid)
         }
-        
+        async function getSquarePlaced() {
+            await axios({
+                method: "get",
+                url: `${process.env.REACT_APP_API_URL}api/tree/all-placed`,
+                withCredentials:true,
+            })
+            .then((res) => {
+                console.log(res.data);
+                setTree(res.data);
+            })
+            .catch((err) => console.log(err));
+        }
+        if (tree === null) {
+            getSquarePlaced()
+        }
 
     },[user])
 

@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import './square.scss';
 import Case from "./Case";
-
 import './modal.scss';
 import CaseEmpty from "./CaseEmpty";
 

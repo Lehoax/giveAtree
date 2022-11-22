@@ -28,3 +28,21 @@ module.exports.newOrder = async (req, res) => {
     }
 }
 
+
+
+module.exports.getAll = async (req, res) => {
+    try {
+        const order = await OrderModel.find({}, function(err, orders) {
+            if (err) {
+                res.json({err}).status(500);
+            }
+            res.json({orders: orders}).status(200);
+        });
+
+        
+    
+    } catch (err) {
+        console.log(err.message);
+    }
+}
+

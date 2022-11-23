@@ -11,6 +11,7 @@ const cookieParser = require('cookie-parser');
 const {checkUser, requireAuth, adminAuth} = require('./middleware/auth.middleware');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger');
+const path = require('path');
 // This is your test secret API key.
 const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 
@@ -38,6 +39,14 @@ app.use(express.urlencoded({
 }));
 app.use(cookieParser());
 
+if(process.env.NODE.ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client', 'build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+  });
+
+}
 // jwt
 app.get('*', checkUser);
 app.get('/jwtid', requireAuth, (req, res) => {

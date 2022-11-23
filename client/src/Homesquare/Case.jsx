@@ -22,16 +22,16 @@ const Case = ({ user, tree, squareCase }) => {
                         </svg>
                     </div>
                     <div className="details-modal-title">
-                        <h1>My details modal</h1>
+                        <h1>Arbre</h1>
                     </div>
                     <div className="details-modal-content">
-                        <h2>{user.pseudo}</h2>
+                        <h2>pseudo : {user.pseudo}</h2>
 
-                        <p>{tree.specie} </p>
-                        <p>{tree.age} ans</p>
+                        <p>espèce : {tree.specie} </p>
+                        <p>age : {tree.age} ans</p>
 
-                        <p>{tree.categorie} </p>
-                        <p>{tree.price.$numberDecimal} € </p>
+                        <p>categorie : {tree.categorie} </p>
+                        <p>prix : {tree.price.$numberDecimal} € </p>
                     </div>
                 </div>
             </details>

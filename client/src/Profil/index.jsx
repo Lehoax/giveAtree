@@ -7,7 +7,6 @@ import "./index.css"
 
 const Profil = ({uid}) => {
     const [pseudo, setPseudo] = useState("");
-    const [formSubmit, setFormSubmit] = useState("");
     const [street, setStreet] = useState("");
     const [city, setCity] = useState("");
     const [cp, setCp] = useState("");
@@ -34,7 +33,6 @@ const Profil = ({uid}) => {
             })
                 .then((res) => {
                     console.log(res);
-                    setFormSubmit(true);
                     document.getElementById('update-profil-message').innerHTML = "Modification effectuées"
                 })
                 .catch((err) => console.log(err));
@@ -142,7 +140,7 @@ const Profil = ({uid}) => {
        <input type="submit" value="Modifier profile" />
        <p id="update-profil-message"></p>
    </form>
-   {order!==null && <Orders uid={uid} orders={order} user={user} trees={tree}/>}
+   {order!==null && <Orders uid={uid} orders={order} user={user}trees={tree}/>}
    </div>
    </>
     )

@@ -2,7 +2,9 @@
   "scripts": {
     "start": "nodemon serve",
     "swagger-autogen": "node ./config/swagger.js",
-    "test": "jest /tests"
+    "test": "jest /tests",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+
   },
   "dependencies": {
     "and": "^0.0.3",
@@ -21,5 +23,8 @@
     "swagger-jsdoc": "^6.2.5",
     "swagger-ui-express": "^4.6.0",
     "validator": "^13.7.0"
-  }
+  },
+  "engines": {
+    "node": "19.0.0"
+}
 }

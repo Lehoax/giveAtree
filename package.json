@@ -3,7 +3,7 @@
     "start": "nodemon serve",
     "swagger-autogen": "node ./config/swagger.js",
     "test": "jest /tests",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm config set legacy-peer-deps true && npm install --only=dev && npm install && npm run build"
 
   },
   "dependencies": {

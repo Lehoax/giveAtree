@@ -13,7 +13,7 @@ module.exports.getUser = async (req, res) => {
         } else {
             res.send(err);
         }
-    }).select('pseudo orders createdAt admin email street cp city')
+    }).select('pseudo orders createdAt updateAt admin email street cp city firstName lastName')
     
 }
 

@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import Orders from "./Orders";
+import "./index.css"
 
 const Profil = ({uid}) => {
     const [pseudo, setPseudo] = useState("");
@@ -11,6 +13,8 @@ const Profil = ({uid}) => {
     const [cp, setCp] = useState("");
     const [user, setUser] = useState(null);
     const [tree, setTree] = useState(null);
+    const [order, setOrder] = useState(null);
+
 
 
 
@@ -64,21 +68,31 @@ const Profil = ({uid}) => {
                 withCredentials:true,
             })
             .then((res) => {
-                console.log(res.data);
                 setTree(res.data);
+            })
+            .catch((err) => console.log(err));
+            await axios({
+                method: "get",
+                url: `${process.env.REACT_APP_API_URL}api/order/all`,
+                withCredentials:true,
+            })
+            .then((res) => {
+                setOrder(res.data.orders);
             })
             .catch((err) => console.log(err));
         }
         if (tree === null) {
             getSquarePlaced()
         }
+     
 
     },[user])
 
     return(
         <>
-        <h1>Profile</h1>
+        <div className="user-profil-container">
         <form action="" onSubmit={handleUpdate} id="sign-up-form">
+        <h1>Profile</h1>
        <br/>
        <label htmlFor="pseudo">Pseudo</label>
        <br />
@@ -128,6 +142,8 @@ const Profil = ({uid}) => {
        <input type="submit" value="Modifier profile" />
        <p id="update-profil-message"></p>
    </form>
+   {order!==null && <Orders uid={uid} orders={order} user={user} trees={tree}/>}
+   </div>
    </>
     )
 }

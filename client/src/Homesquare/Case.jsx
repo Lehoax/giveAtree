@@ -6,7 +6,6 @@ import './modal.scss';
 
 const Case = ({ user, tree, squareCase }) => {
 
-    console.log(tree);
     return (
         <>
             <details className={tree.categorie}>

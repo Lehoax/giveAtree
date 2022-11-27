@@ -22,16 +22,23 @@ const app = express()
 // use swagger-Ui-express for your app documentation endpoint
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-const corsOption = {
-  origin: process.env.CLIENT_URL,
-  credentials: true,
-  'allowedHeaders': ['sessionId', 'Content-Type'],
-  'exposedHeaders': ['sessionId'],
-  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  'preflightContinue': false
-}
-app.use(cors(corsOption));
+// const corsOption = {
+//   origin: process.env.CLIENT_URL,
+//   credentials: true,
+//   'allowedHeaders': ['sessionId', 'Content-Type'],
+//   'exposedHeaders': ['sessionId'],
+//   'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   'preflightContinue': false
+// }
+// app.use(cors(corsOption));
 
+app.use(function(req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", process.env.CLIENT_URL);
+  res.setHeader("Access-Control-Allow-Credentials","true");
+  res.setHeader("Access-Control-Expose-Headers", "Set-Cookie");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, x-xsrf-token, X-Requested-With, Accept, Expires, Last-Modified, Cache-Control");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+});
 
 app.use(express.json());
 app.use(express.urlencoded({

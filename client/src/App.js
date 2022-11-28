@@ -13,11 +13,16 @@ function App() {
 
 
   useEffect(() => {
+    let token = localStorage.getItem("jwt")
+
     const fetchToken = async () => {
       await axios({
         method: "get",
         url: `${process.env.REACT_APP_API_URL}jwtid`,
         withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`, 
+        },
       })
         .then((res) => {
           setUid(res.data);

@@ -66,7 +66,7 @@ app.post("/create-payment-intent", async (req, res) => {
   });
 });
   
-
+app.use('*', checkUser);
 app.use('/api/user', userRoutes);
 app.use('/api/tree', treeRoutes);
 app.use('/api/admin', adminAuth ,adminRoutes);

@@ -39,6 +39,8 @@ app.use(express.urlencoded({
 }));
 app.use(cookieParser());
 
+app.use('*', checkUser);
+
 // jwt
 app.get('/jwtid', requireAuth, (req, res) => {
   res.status(200).send(res.locals.user._id)
@@ -66,7 +68,6 @@ app.post("/create-payment-intent", async (req, res) => {
   });
 });
   
-app.use('*', checkUser);
 app.use('/api/user', userRoutes);
 app.use('/api/tree', treeRoutes);
 app.use('/api/admin', adminAuth ,adminRoutes);

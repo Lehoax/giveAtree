@@ -23,7 +23,7 @@ const app = express()
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 const corsOption = {
-  origin: process.env.CLIENT_URL,
+  origin:"*",
   credentials: true,
   'allowedHeaders': ['sessionId', 'Content-Type'],
   'exposedHeaders': ['sessionId'],

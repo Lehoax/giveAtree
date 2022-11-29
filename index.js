@@ -30,14 +30,7 @@ const corsOption = {
   'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
   'preflightContinue': false
 }
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Credentials', true);
-  res.header('Access-Control-Allow-Origin', req.headers.origin);
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
-  next();
-});
-//app.use(cors(corsOption));
+app.use(cors(corsOption));
 
 
 app.use(express.json());
@@ -45,8 +38,6 @@ app.use(express.urlencoded({
   extended: true
 }));
 app.use(cookieParser());
-
-app.use('*', checkUser);
 
 // jwt
 app.get('/jwtid', requireAuth, (req, res) => {
@@ -75,6 +66,7 @@ app.post("/create-payment-intent", async (req, res) => {
   });
 });
   
+app.use('*', checkUser);
 app.use('/api/user', userRoutes);
 app.use('/api/tree', treeRoutes);
 app.use('/api/admin', adminAuth ,adminRoutes);

@@ -6,7 +6,10 @@ const {signUpErrors, signInErrors} = require('../utils/handlerErrors')
 const maxAge = 3 * 24 * 60 * 60 * 1000
 const createToken = (id) => {
     return jwt.sign({id}, process.env.TOKEN_SECRET, {
-        expiresIn: maxAge
+        expiresIn: maxAge,
+        httpOnly: true, 
+        secure: true, 
+        sameSite: false,
     })
 }
 

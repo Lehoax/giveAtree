@@ -9,7 +9,6 @@ const createToken = (id) => {
         expiresIn: maxAge,
         httpOnly: true, 
         secure: true, 
-        sameSite: false,
     })
 }
 

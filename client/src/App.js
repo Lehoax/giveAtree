@@ -10,7 +10,6 @@ import Profil from './Profil';
 function App() {
   const [uid, setUid] = useState(null);
   let [user, setUser] = useState(null);
-  axios.defaults.withCredentials = true;
 
 
   useEffect(() => {

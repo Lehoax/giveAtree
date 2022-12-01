@@ -25,7 +25,7 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 const corsOption = {
   origin: process.env.CLIENT_URL,
   credentials: true,
-  'allowedHeaders': ['sessionId', 'Content-Type', 'Origin, X-Requested-With, Content-Type, Accept, Authorization'],
+  'allowedHeaders': ['sessionId', 'Content-Type'],
   'exposedHeaders': ['sessionId'],
   'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
   'preflightContinue': false
@@ -39,7 +39,9 @@ app.use(express.urlencoded({
 }));
 app.use(cookieParser());
 
+
 // jwt
+app.get('*', checkUser);
 app.get('/jwtid', requireAuth, (req, res) => {
   res.status(200).send(res.locals.user._id)
 });
@@ -66,7 +68,7 @@ app.post("/create-payment-intent", async (req, res) => {
   });
 });
   
-app.use('*', checkUser);
+
 app.use('/api/user', userRoutes);
 app.use('/api/tree', treeRoutes);
 app.use('/api/admin', adminAuth ,adminRoutes);

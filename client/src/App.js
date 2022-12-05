@@ -40,6 +40,7 @@ function App() {
 
   
   return (
+    <>
     <div className="App">
     <div className="container-title">
       <h1 id='app-title'>Give a tree</h1>
@@ -62,9 +63,17 @@ function App() {
         <AuthForm />
         </div>
       )}
-  
-     
     </div>
+      <div className='footer'>
+      <a href='https://www.linkedin.com/in/leolair/' target="_blank"> 
+      <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" className='footer_logo'/>
+      </a>
+      <a href='https://github.com/Lehoax/giveAtree' target="_blank"> 
+      <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" className='footer_logo'/>
+      </a>
+    </div>
+    </>
+     
   );
 }
 

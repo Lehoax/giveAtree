@@ -5,4 +5,6 @@
     flex-wrap: wrap;
     overflow-y: scroll;
     margin-right: 15%;
+    border: 2px solid black;
+    padding: 5px;
 }

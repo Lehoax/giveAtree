@@ -1,5 +1,9 @@
+body{
+  background-color: white;
+}
 .App {
   text-align: center;
+  margin-bottom: 30px;
 }
 
 .App-logo {
@@ -48,5 +52,15 @@
   margin-bottom: 5%;
 }
 .container-title{
-  margin-bottom: 20%;
+  margin-bottom: 5rem;
+}
+.footer{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+.footer_logo{
+  height: 4rem;
 }

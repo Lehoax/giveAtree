@@ -23,3 +23,12 @@
     background-color: green;
 }
 
+@media (max-width: 800px) {
+    .square-container {
+        width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+      
+    }
+    
+  }

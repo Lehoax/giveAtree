@@ -8,3 +8,9 @@
 .cat-list{
     border-radius: 10px;
 }
+@media (max-width: 800px) {
+    .tree{
+        width: 100%;
+    }
+  }
+

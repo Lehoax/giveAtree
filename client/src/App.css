@@ -43,7 +43,32 @@ body{
 .home-form{
   display: flex;
 }
-
+@media (max-width: 800px) {
+  .home-form{
+    flex-direction: column;
+  }
+  #home-tree{
+    width: 15em !important;
+  }
+  #sign-in-form{
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #sign-up-form{
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .footer{
+    display: none;
+  }
+  .home-content{
+    flex-direction: column;
+  }
+  .tree{
+    display:block;
+  }
+  
+}
 #home-tree{
   width: 30em;
 }

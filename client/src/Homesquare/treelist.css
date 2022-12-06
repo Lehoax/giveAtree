@@ -8,3 +8,11 @@
     border: 2px solid black;
     padding: 5px;
 }
+@media (max-width: 800px) {
+    .treelist{
+        display: block;
+        width: 310px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+  }

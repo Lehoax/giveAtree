@@ -12,7 +12,7 @@ const HomeSquare = ({ uid }) => {
 
   const pull_data = (data) => {
     if (data === true) {
-      console.log("pull data truie");
+      console.log("pull data true");
     }
   }
 

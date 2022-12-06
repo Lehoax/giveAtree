@@ -2,3 +2,12 @@
     display: flex;
     justify-content: space-around;
 }
+
+@media (max-width: 800px) {
+    .user-profil-container{
+        display: block;
+        margin-top: 20rem;
+    }
+    
+    
+  }

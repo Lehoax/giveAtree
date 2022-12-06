@@ -46,7 +46,6 @@ const Orders = ({uid, orders, trees, user}) => {
                         {({ blob, url, loading, error }) => (loading ? 'Chargement...' : 'Telecharger')}
                     </PDFDownloadLink>
                 </div>
-
             )
         })}
         </div>

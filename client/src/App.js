@@ -10,6 +10,12 @@ import Profil from './Profil';
 function App() {
   const [uid, setUid] = useState(null);
   let [user, setUser] = useState(null);
+  let [alertBox, setAlertBox] = useState(false);
+
+  function AlertBox() {
+    alert('Ce site est un prototype ne saisissez pas vos vraies informations. Pour le paiement en carte saisissez le n° de carte 4242 4242 4242 4242');
+    setAlertBox(true);
+  }
 
 
   useEffect(() => {
@@ -72,6 +78,7 @@ function App() {
       <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" className='footer_logo'/>
       </a>
     </div>
+    {alertBox == false && AlertBox()}
     </>
      
   );
